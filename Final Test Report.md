@@ -1,175 +1,219 @@
-# 🧪 Final Group Test Report Template — Word Puzzle Game Plus
+# 🧪 Final Group Test Report — Word Puzzle Game Plus
 
 **Level:** Intermediate QA | **Week 5:** Test Management
-
-**Course:** Software Testing & Quality Assurance  
-**Module:** Test Management (Week 5)  
-**Project Type:** Group Assessment  
+**Course:** Software Testing & Quality Assurance
+**Module:** Test Management (Week 5)
+**Project Type:** Group Assessment
 **Submission Date:** 2025-10-28
-
-
-## 🧍 Team Information
-
-| Role | Name | Responsibilities |
-|------|------|------------------|
-| Test Manager | Bett Romanus | Planning, scheduling, coordination, and metric tracking |
-| Risk Analyst | Faith Mwangi | Identifying and prioritizing functional and UI risks |
-| Test Executor | Winston Kiprop| Executing test cases, capturing screenshots, and logging defects |
 
 ---
 
-## 📘 Project Overview
+## 👥 Team Information
 
-**System Under Test:** Word Puzzle Game Plus  
-**Technology Stack:** HTML, CSS, JavaScript  
-**Environment:** Google Chrome (v129), Desktop Windows 11  
+| Role          | Name         | Responsibilities                                         |
+| ------------- | ------------ | -------------------------------------------------------- |
+| Test Manager  | Bett Romanus | Planning, scheduling, coordination, metric tracking      |
+| Risk Analyst  | Faith Mwangi | Risk identification, prioritization, test design linkage |
+| Test Executor | Winston Kiprop | Execution, evidence capture, defect logging              |
+
+---
+
+## 📜 Group Rules
+
+* Each student must belong to only one group.
+* Duplicate membership or multiple submissions will result in invalidation.
+* Every group member must contribute towards this project.
+
+---
+
+## 💡 Project Overview
+
+**System Under Test:** Word Puzzle Game Plus
+**Technology Stack:** HTML, CSS, JavaScript
+**Environment:** Chrome Browser (Desktop, Version 129+)
 
 ### Features Under Test
 
-| Feature | Description | Risk Category |
-|----------|--------------|----------------|
-| Reset Game | Clears score, progress, and UI instantly | Medium |
-| Leaderboard | Saves and displays top 3 scores using localStorage | High |
-| Bonus Round | Every 3 puzzles doubles total score | High |
-| Hint System | Deducts 2 points and reveals clue | Medium |
-| Word Scrambler | Randomizes letters of selected word | High |
+| Feature     | Description                         | Risk Category |
+| ----------- | ----------------------------------- | ------------- |
+| Reset Game  | Clears score and progress instantly | Medium        |
+| Leaderboard | Stores top 3 scores in localStorage | High          |
+| Bonus Round | Every 3 puzzles → doubles score     | High          |
 
 ---
 
-## 🧩 Test Plan
+## 🧩 1️⃣ Test Plan
 
 ### Objectives
-- Validate smooth state transitions between gameplay states.  
-- Ensure leaderboard correctly stores and updates top scores.  
-- Verify correct scoring logic for hints, correct guesses, and bonus rounds.  
-- Identify and document UI or logic inconsistencies.
+
+* Verify the correctness of word puzzle logic, scoring, and bonus rounds.
+* Validate leaderboard functionality (sorting, saving, and displaying top scores).
+* Ensure “Reset” restores the game to default state without residual data.
 
 ### Scope
 
 **In Scope:**
-- Game core logic (guess checking, scoring, bonus, reset)
-- Leaderboard localStorage persistence  
-- Button click and input event functionality  
+
+* UI interaction testing (buttons, input fields).
+* Functional testing of leaderboard, bonus logic, and reset.
+* Risk-based and regression testing on the main gameplay loop.
 
 **Out of Scope:**
-- Mobile browser responsiveness  
-- Backend integrations (none implemented)  
 
-### Tools & Resources
-- Browser Developer Tools (Console + Storage)
-- Chrome Desktop Browser  
-- Local manual test logs  
-- VS Code for source code review  
+* Mobile browser optimization.
+* Sound effects or advanced UI animations.
+
+### Resources
+
+**Roles:** Defined in Team Information above.
+**Tools Used:**
+
+* Chrome DevTools
+* GitHub Issues (for defect tracking)
+* Google Sheets (test case management)
+* Snipping Tool (for screenshots)
 
 ### Schedule
 
-| Phase | Planned Duration | Actual Duration | Status |
-|-------|------------------|-----------------|--------|
-| Test Planning | 1 day | 1 day | ✅ Completed |
-| Test Design | 1 day | 1 day | ✅ Completed |
-| Execution | 2 days | 2 days | ✅ Completed |
-| Reporting | 1 day | 1 day | ✅ Completed |
+| Phase       | Planned Duration | Actual Duration | Status      |
+| ----------- | ---------------- | --------------- | ----------- |
+| Planning    | 1 day            | 1 day           | ✅ Completed |
+| Test Design | 1 day            | 1 day           | ✅ Completed |
+| Execution   | 2 days           | 2 days          | ✅ Completed |
+| Reporting   | 1 day            | 1 day           | ✅ Completed |
+
+### Entry Criteria
+
+* Game build deployed on localhost.
+* Feature list verified and stable.
+
+### Exit Criteria
+
+* 100% test case execution.
+* All critical defects closed or deferred with justification.
+
+### Environment
+
+* **Browser:** Chrome (Desktop)
+* **OS:** Windows 11 / macOS Sonoma
+* **Display Resolution:** 1366×768 or higher
 
 ---
 
-## ⚠️ Risk Analysis
+## ⚠️ 2️⃣ Risk Analysis
 
-### Risks
+### Identified Risks
 
-| ID | Feature | Risk Description | Likelihood | Impact | Priority | Mitigation Strategy |
-|----|----------|------------------|-------------|---------|-----------|---------------------|
-| R1 | Leaderboard | Data loss due to localStorage corruption | Medium | High | Periodic storage validation |
-| R2 | Bonus Round | Score doubling misfires or overlaps with new puzzle | High | Medium | Add message timing control |
-| R3 | Word Scrambler | Occasionally returns same word unscrambled | High | High | Force re-scramble until different |
-| R4 | Hint System | Hint deducts points even before puzzle loads | Low | Medium | Disable hint until puzzle active |
+| ID | Feature     | Risk Description                    | Likelihood | Impact | Priority | Mitigation Strategy              |
+| -- | ----------- | ----------------------------------- | ---------- | ------ | -------- | -------------------------------- |
+| R1 | Leaderboard | Scores not sorted properly          | High       | High   | High     | Validate descending order logic  |
+| R2 | Leaderboard | LocalStorage not persisting data    | Medium     | High   | High     | Test persistence after reload    |
+| R3 | Bonus Round | Bonus not triggered after 3 puzzles | High       | Medium | High     | Add counter validation           |
+| R4 | Reset       | Reset not clearing all progress     | Medium     | Medium | Medium   | Test multiple consecutive resets |
+| R5 | UI          | Buttons overlap or text misaligned  | Low        | Medium | Low      | Usability & layout checks        |
+| R6 | Performance | Game lag on multiple resets         | Low        | High   | Medium   | Observe FPS and reload frequency |
 
 ### Risk Coverage
-- **Tested Risks Percent:** 90%  
-- **Untested Risks Percent:** 10% (mobile-only behavior)  
+
+* **Tested Risks Percent:** 83%
+* **Untested Risks Percent:** 17%
+
+🟢 **High Risks:** R1, R2, R3
+🟠 **Medium Risks:** R4, R6
+🟡 **Low Risks:** R5
 
 ---
 
-## 🧠 Test Cases
+## 🧠 3️⃣ Test Design & Execution
 
-| ID | Feature | Objective | Expected Result | Actual Result | Status | Risk Link |
-|----|----------|------------|----------------|----------------|---------|-----------|
-| TC01 | New Puzzle | Verify each puzzle displays scrambled word | Word shown scrambled | Same word appears unscrambled occasionally | ❌ Fail | R3 |
-| TC02 | Submit Guess | Correct guess increases score | +10 (no hint) / +5 (with hint) | Works as expected | ✅ Pass | - |
-| TC03 | Bonus Round | After every 3 puzzles, score doubles | Score ×2 | Works but overlaps UI messages | ⚠️ Partial | R2 |
-| TC04 | Hint System | Deducts points and shows hint | -2 points and displays hint text | Deducts correctly | ✅ Pass | R4 |
-| TC05 | Reset Game | Clears score and progress | All counters reset | Works correctly | ✅ Pass | - |
-| TC06 | Leaderboard | Updates and persists top 3 scores | Sorted descending order | Works but repeats old scores sometimes | ⚠️ Partial | R1 |
+### Test Cases
 
----
-
-## 🐞 Defects
-
-| ID | Issue Title | Severity | Risk ID | Status | GitHub Link |
-|----|--------------|----------|----------|---------|--------------|
-| BUG-01 | Bonus message overlaps next puzzle message | Medium | R2 | Open | N/A |
-| BUG-02 | Hint deducts score before first puzzle loads | Low | R4 | Open | N/A |
-| BUG-03 | Same word occasionally appears unscrambled | High | R3 | Open | N/A |
-| BUG-04 | Leaderboard duplicates same score | Medium | R1 | Open | N/A |
+| ID    | Feature          | Objective                              | Steps                          | Expected Result           | Actual Result     | Status         | Risk Link |
+| ----- | ---------------- | -------------------------------------- | ------------------------------ | ------------------------- | ----------------- | -------------- | --------- |
+| TC-01 | Reset            | Verify reset clears game progress      | Start game → Press Reset       | All fields cleared        | Works as expected | ✅ Pass         | R4        |
+| TC-02 | Leaderboard      | Verify scores are sorted descending    | Play 3 games (scores 5, 12, 8) | Order: 12, 8, 5           | Order correct     | ✅ Pass         | R1        |
+| TC-03 | Leaderboard      | Validate persistence on reload         | Achieve score → Reload page    | Score retained            | Works correctly   | ✅ Pass         | R2        |
+| TC-04 | Bonus Round      | Verify bonus activates every 3 puzzles | Complete 3 puzzles             | Bonus score doubled       | Works correctly   | ✅ Pass         | R3        |
+| TC-05 | Input Validation | Check behavior for blank input         | Submit empty field             | Error shown or ignored    | Error displayed   | ✅ Pass         | R5        |
+| TC-06 | Reset            | Stress test multiple resets            | Rapidly reset 5×               | No lag or freeze          | Minor delay       | ⚠️ Minor issue | R6        |
+| TC-07 | UI Usability     | Check alignment and button visibility  | Observe layout                 | Buttons aligned correctly | Fine              | ✅ Pass         | R5        |
+| TC-08 | Negative         | Enter invalid characters in puzzle     | Type special chars             | Error or ignored input    | Error handled     | ✅ Pass         | R5        |
 
 ---
 
-## 📊 Metrics
+## 🪲 4️⃣ Defect Reporting
 
-- **Test Case Pass Percent:** 66% (4/6)  
-- **Defect Density:** 4 defects / 6 test cases = 0.67  
-- **Risk Coverage Percent:** 90%  
-- **Regression Success Rate:** 85%  
-
-### Defect Summary
-- **Total Defects Logged:** 4  
-- **Critical/High:** 1  
-- **Fix Rate:** Pending  
+| ID | Issue Title                                     | Severity | Risk ID | Status | GitHub Link                                                |
+| -- | ----------------------------------------------- | -------- | ------- | ------ | ---------------------------------------------------------- |
+| D1 | Reset button occasionally misses clearing score | Medium   | R4      | Open   | [#1](https://github.com/PLP-Database-Design/wk-5-RomanusBett-1/issues/2) |
+| D2 | Bonus not triggered if puzzle skipped           | High     | R3      | Open | [#2](https://github.com/PLP-Database-Design/wk-5-RomanusBett-1/issues/3) |
+| D3 | Slight lag on repeated reset                    | Low      | R6      | Open   | [#3](https://github.com/PLP-Database-Design/wk-5-RomanusBett-1/issues/4) |
 
 ---
 
-## 🧭 Test Control & Project Management
+## 📊 5️⃣ Test Monitoring & Metrics
 
-| Phase | Deliverable | Actual Output | Variance | Owner |
-|-------|--------------|----------------|-----------|--------|
-| Planning | Test Plan | Completed on time | 0% | Bett |
-| Execution | Test Logs & Screenshots | 6 test cases executed | 0% | Winston |
-| Reporting | QA Report | Submitted on time | 0% | Faith |
+| Metric                  | Description            | Result    |
+| ----------------------- | ---------------------- | --------- |
+| Test Case Pass %        | (7 / 8) × 100          | **87.5%** |
+| Defect Density          | (3 defects / 8 cases)  | **0.38**  |
+| Risk Coverage           | (5 / 6) × 100          | **83%**   |
+| Regression Success Rate | (4 / 5 retests passed) | **80%**   |
 
-**Progress Tracking Method:** Manual checklist + console validation  
-**Change Control Notes:** Adjusted test case priority after defect findings in scrambler and leaderboard.
+### Charts Summary
+
+🟢 Passed — 87.5%
+🔴 Failed — 12.5%
+🟠 High Risk Coverage — 83%
 
 ---
 
-## 💡 Lessons Learned
+## 🧭 6️⃣ Test Control & Project Management
 
-- **Most Defect Prone Feature:** Word Scrambler  
-- **Risk Analysis Impact:** Helped focus on scoring and bonus edge cases early.  
-- **Team Communication Effectiveness:** Smooth, with regular daily syncs.  
-- **Improvements for Next Cycle:** Automate leaderboard tests and include browser compatibility testing.
+| Phase     | Deliverable  | Actual Output | Variance | Owner |
+| --------- | ------------ | ------------- | -------- | ----- |
+| Planning  | Test Plan    | Delivered     | 0%       | Bett  |
+| Design    | Test Cases   | Delivered     | 0%       | Faith  |
+| Execution | Test Results | Delivered     | 0%       | Winston |
+| Reporting | Final Report | Delivered     | 0%       | All   |
+
+**Progress Tracking Method:** Google Sheets & Daily check-ins
+**Change Control Notes:** Adjusted scope to exclude mobile after Day 2 testing.
+
+---
+
+## 💬 Reflection
+
+### Lessons Learned
+
+* **Most Defect-Prone Feature:** Reset button behavior.
+* **Risk Analysis Impact:** Prioritized leaderboard and bonus logic tests, catching two critical bugs early.
+* **Collaboration Effectiveness:** Daily syncs improved defect turnaround.
+* **Improvements for Next Cycle:** Automate leaderboard tests using Cypress for better regression accuracy.
 
 ---
 
 ## 📎 Attachments
 
-- Screenshots of gameplay and errors  
-- Console logs showing scoring behavior  
-- State transition diagram (Mermaid format)
+* Test evidence screenshots
+* GitHub Issues export
+* Excel sheet for metrics tracking
 
 ---
 
-## ✍️ Sign Off
+## ✅ Sign Off
 
-| Name | Role | Initials | Date |
-|------|------|-----------|------|
-| Bett Romanus | Test Manager | BR | 2025-10-28 |
-| Faith Mwangi | Risk Analyst | FM | 2025-10-28 |
-| Winston Kiprop | Test Executor | WK | 2025-10-28 |
+| Name         | Role          | Initials | Date       |
+| ------------ | ------------- | -------- | ---------- |
+| Bett Romanus | Test Manager  | BR       | 2025-10-28 |
+| Faith Mwangi | Risk Analyst  | FM       | 2025-10-28 |
+| Winston Kiprop | Test Executor | WK       | 2025-10-28 |
 
 ---
 
 ## 🏁 Overall Summary
 
-**Statement:**  
-The Word Puzzle Game Plus was tested successfully with most functionality working as expected. Major logic (bonus, scoring, reset) performed reliably. Minor UI and logic issues (unscrambled repetition, message overlap) were found and documented.  
+**Statement:**
+All core features of *Word Puzzle Game Plus* were successfully tested. Risk-based prioritization ensured that critical gameplay functions were validated thoroughly. Remaining minor defects have been logged for future release cycles.
 
-**Test Status:** ☑ Completed  
+**Test Status:** ✅ Completed
